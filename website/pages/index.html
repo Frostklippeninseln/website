@@ -24,12 +24,18 @@
             padding: 20px;
             display: flex;
             align-items: center;
-            position: fixed;
         }
 
         .logo img {
             height: 50px; /* Adjust height as needed */
             margin-right: 100px;
+            background-color: white;
+            position: fixed;
+            z-index: 4; /* Stay on top */
+        }
+        .logo:hover + .sidebar {
+            width: 250px;
+            margin-left: 100px;
         }
 
         nav ul {
@@ -64,8 +70,8 @@
         /* Hero section styles */
         .hero {
             text-align: center;
-            padding: 100px 0;
-            background-color: lightblue;
+            padding: 60px 0;
+            background-image: url(../public/mountainart.jpg);
         }
 
         .hero-text {
@@ -75,6 +81,8 @@
         /* Main content section styles */
         main {
             padding: 20px;
+            min-height: 100vh;
+            
         }
 
         .about-us,
@@ -89,6 +97,13 @@
             text-align: center;
             display: flex;
             justify-content: space-around;
+            position: sticky;
+            bottom: -10em;
+            width: 100%;
+            transition: bottom 0.5s;
+        }
+        footer:hover {
+            bottom: 0px;
         }
 
         footer .quick-links ul {
@@ -104,44 +119,151 @@
             color: #333;
         }
         .statename{
-            font-size: 35px;
+            font-size: 25px;
+            color: #025E73;
         }
+        .sidebar {
+            height: 100%; /* 100% Full-height */
+            width: 0; /* 0 width - change this with JavaScript */
+            position: fixed; /* Stay in place */
+            z-index: 3; /* Stay on top */
+            top: 0;
+            left: 0;
+            background-color: #111; /* Black*/
+            overflow-x: hidden; /* Disable horizontal scroll */
+            padding-top: 100px; /* Place content 60px from the top */
+            transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+        }
+
+        /* The sidebar links */
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Position and style the close button (top right corner) */
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* The button used to open the sidebar */
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+        #overlay {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2;
+            cursor: pointer;
+            /* Add transition properties */
+            transition: opacity 0.5s ease; /* Transition opacity over 0.5 seconds with ease timing function */
+        }
+
+        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+        #main {
+            transition: margin-left .5s; /* If you want a transition effect */
+            padding: 20px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidebar {padding-top: 15px;}
+            .sidebar a {font-size: 18px;}
+        }
+        .big-text{
+            font-size: 50px;
+            color: lightblue;
+            
+        }
+        .navinfo{
+            color: #d4c0be;
+            font-size: medium;
+        }
+        .carousel-container {
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+        }
+  
+        .carousel-slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: auto;
+        }
+
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
+        <div class="logo" onmouseenter="openSidebar()">
             <a href="index.html"><img src="../public/Frostklingeninseln.png" alt="Monarchy Logo"></a>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Monarch's Message</a></li>
-                <li><a href="#">Government Departments</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </nav>
-        <div class="search">
-            <input type="text" placeholder="Search...">
-            <button type="submit">Search</button>
-        </div>
     </header>
-
     <section class="hero">
         <div class="hero-text">
-            <h1 class="statename">Wilkommen auf den Frostklippeninseln</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <h1 class="statename">Velkomin á                <h1 class="statename">
+                <span class="big-text">Frostklippeninseln</span>
+            </h1>
+            </h1>
         </div>
     </section>
 
     <main>
         <!-- Main content sections -->
+        <div id="Sidebar" class="sidebar" onmouseleave="closeSidebar()">
+            <p class="navinfo">Anmelden und Registrieren</p>
+            <a href="#">Login</a>
+            <a href="#">Einbürgerung</a>
+            <p class="navinfo">Informationen zur Einbürgerung</p>
+            <a href="#">Staatsbürgerschaft</a>
+            <a href="#">Anforderungen zur Einbürgerung</a>
+            <p class="navinfo">Leben auf den Frostklippeninseln</p>
+            <a href="#">Lebensbedingungen</a>
+            <a href="#">Sprachen</a>
+            <a href="#">Regionen</a>
+            <p class="navinfo">Allgemein</p>
+            <a href="#">Hilfe</a>
+            <a href="#">Fehler Melden</a>
+        </div>
+        <div id="overlay"></div> 
+        
+        <div id="main">
+        </div>
         <section class="about-us">
-            <h2>About Us</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            <div class="carousel-container">
+                <img class="carousel-slide" src="" alt="Image Carousel">
+              </div>
         </section>
 
         <section class="monarchs-message">
@@ -169,5 +291,61 @@
             <p>Address: 123 Royal Street, Monarchia</p>
         </div>
     </footer>
+    <script>
+  const imageFolder = '../public/carousel'; // Folder path where your images are located
+  let currentImageIndex = 0;
+  let images = [];
+
+  function fetchImages() {
+    fetch(imageFolder)
+      .then(response => response.text())
+      .then(text => {
+        const parser = new DOMParser();
+        const htmlDoc = parser.parseFromString(text, 'text/html');
+        const imgElements = htmlDoc.querySelectorAll('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]');
+        images = Array.from(imgElements).map(element => element.getAttribute('href'));
+        startCarousel();
+      })
+      .catch(error => console.error('Error fetching images:', error));
+  }
+
+  function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    const imagePath = imageFolder + images[currentImageIndex];
+    const imgElement = document.querySelector('.carousel-slide');
+    imgElement.src = imagePath;
+  }
+
+  function startCarousel() {
+    showNextImage(); // Display the first image
+    setInterval(showNextImage, 5000); // Switch to the next image every 5 seconds
+  }
+
+  fetchImages();
+function openSidebar() {
+    var sidebar = document.getElementById("Sidebar");
+    var main = document.getElementById("main");
+    var overlay = document.getElementById("overlay");
+
+    sidebar.style.width = "300px";
+    main.style.marginLeft = "300px";
+    overlay.style.display = "block";
+    overlay.style.backgroundColor = "rgba(0,0,0,0.7)";
+}
+
+function closeSidebar() {
+    var sidebar = document.getElementById("Sidebar");
+    var main = document.getElementById("main");
+    var overlay = document.getElementById("overlay");
+    overlay.style.display = "none";
+
+    sidebar.style.width = "0";
+    main.style.marginLeft = "0";
+    overlay.style.backgroundColor = "rgba(0,0,0,0)"; /* Set to transparent background */
+}
+    </script>
+    
+    
+    
 </body>
 </html>
