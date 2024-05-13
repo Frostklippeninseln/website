@@ -16,24 +16,22 @@
         /* Body styles */
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             background-color: lightblue;
         }
 
         /* Header styles */
         header {
             background-color: lightblue;
-            padding: 0px;
             display: flex;
             align-items: center;
         }
 
         .logo img {
-            height: 50px; /* Adjust height as needed */
-            margin-right: 100px;
-            background-color: white;
+            height: 50px;
+            margin-left: 20px;
+            margin-top: 20px;
             position: fixed;
-            z-index: 4; /* Stay on top */
+            z-index: 4;
         }
         .logo:hover + .sidebar {
             width: 250px;
@@ -50,23 +48,7 @@
         }
 
         nav ul li a {
-            text-decoration: blue;
             color: #333;
-        }
-
-        .search input[type="text"] {
-            padding: 8px;
-            border-radius: 5px;
-            border: none;
-        }
-
-        .search button {
-            padding: 8px 15px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
         /* Hero section styles */
@@ -84,12 +66,6 @@
         main {
             padding: 20px;
             min-height: 100vh;
-            
-        }
-
-        .about-us,
-        .monarchs-message {
-            margin-bottom: 30px;
         }
 
         /* Footer styles */
@@ -117,7 +93,6 @@
         }
 
         footer .quick-links ul li a {
-            text-decoration: none;
             color: #333;
         }
         .statename{
@@ -125,17 +100,17 @@
             color: #025E73;
         }
         .sidebar {
-            height: 100%; /* 100% Full-height */
-            width: 0; /* 0 width - change this with JavaScript */
-            position: fixed; /* Stay in place */
-            z-index: 3; /* Stay on top */
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 3;
             top: 0;
             left: 0;
             background-color: black;
             background-image: url(../public/mountainart.jpg);
-            overflow-x: hidden; /* Disable horizontal scroll */
-            padding-top: 100px; /* Place content 60px from the top */
-            transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+            overflow-x: hidden;
+            padding-top: 100px;
+            transition: 0.5s;
         }
 
         /* The sidebar links */
@@ -187,20 +162,13 @@
             background-color: rgba(0,0,0,0.5);
             z-index: 2;
             cursor: pointer;
-            /* Add transition properties */
-            transition: opacity 0.5s ease; /* Transition opacity over 0.5 seconds with ease timing function */
+            transition: opacity 0.5s ease;
         }
 
-        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+        /* Style page content */
         #main {
-            transition: margin-left .5s; /* If you want a transition effect */
+            transition: margin-left .5s;
             padding: 20px;
-        }
-
-        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-        @media screen and (max-height: 450px) {
-            .sidebar {padding-top: 15px;}
-            .sidebar a {font-size: 18px;}
         }
         .big-text{
             font-size: 50px;
@@ -211,6 +179,93 @@
             color: #d4c0be;
             font-size: medium;
         }
+        * {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
     </style>
 </head>
 <body>
@@ -221,37 +276,33 @@
     </header>
     <section class="hero">
         <div class="hero-text">
-            <h1 class="statename">Velkomin á                <h1 class="statename">
-                <span class="big-text">Frostklippeninseln</span>
-            </h1>
+            <h1 class="statename">Anforderungen zur Einbürgerung
             </h1>
         </div>
     </section>
 
     <main>
-        <!-- Main content sections -->
         <div id="Sidebar" class="sidebar" onmouseleave="closeSidebar()">
             <p class="navinfo">Anmelden und Registrieren</p>
             <a href="login.html">Login</a>
-            <a href="#">Einbürgerung</a>
-            <p class="navinfo">Informationen zur Einb
-
-ürgerung</p>
-            <a href="#">Staatsbürgerschaft</a>
-            <a href="#">Anforderungen zur Einbürgerung</a>
+            <a href="einbuergerung.html">Einbürgerung</a>
+            <p class="navinfo">Informationen zur Einbürgerung</p>
+            <a href="staatsbuergerschaft.html">Staatsbürgerschaft</a>
+            <a href="anforderungen.html">Anforderungen zur Einbürgerung</a>
             <p class="navinfo">Leben auf den Frostklippeninseln</p>
-            <a href="#">Lebensbedingungen</a>
-            <a href="sprache.html">Sprache</a>
-            <a href="#">Regionen</a>
+            <a href="lebensbedingungen.html">Lebensbedingungen</a>
+            <a href="#">Sprache</a>
+            <a href="regionen.html">Regionen</a>
             <p class="navinfo">Allgemein</p>
             <a href="#">Hilfe</a>
             <a href="#">Fehler Melden</a>
         </div>
         <div id="overlay"></div> 
         
-        <div id="main">
-        </div>
-        
+        <div class="maincontencont">
+            <!-- Hier wird der Text aus der Datei "anforderungen.txt" eingefügt -->
+            <h1 id="anforderungen-heading"></h1>
+            <p id="anforderungen-text"></p>
     </main>
 
     <footer>
@@ -264,34 +315,47 @@
             </ul>
         </div>
         <div class="contact-info">
-            <h3>Contact Us</h3>
-            <p>Email: info@fictionalmonarchy.gov</p>
-            <p>Phone: +1234567890</p>
-            <p>Address: 123 Royal Street, Monarchia</p>
+            <h3>Kontakt</h3>
+            <p>Email: FKI@gmail.com</p>
+            <p>Nummer: +49 176 47674780</p>
+            <p>Addresse: Frostklippeninseln</p>
         </div>
     </footer>
     <script>
-  function openSidebar() {
-      var sidebar = document.getElementById("Sidebar");
-      var main = document.getElementById("main");
-      var overlay = document.getElementById("overlay");
+function openSidebar() {
+    var sidebar = document.getElementById("Sidebar");
+    var main = document.getElementById("main");
+    var overlay = document.getElementById("overlay");
 
-      sidebar.style.width = "300px";
-      main.style.marginLeft = "300px";
-      overlay.style.display = "block";
-      overlay.style.backgroundColor = "rgba(0,0,0,0.7)";
-  }
+    sidebar.style.width = "300px";
+    main.style.marginLeft = "300px";
+    overlay.style.display = "block";
+    overlay.style.backgroundColor = "rgba(0,0,0,0.7)";
+}
 
-  function closeSidebar() {
-      var sidebar = document.getElementById("Sidebar");
-      var main = document.getElementById("main");
-      var overlay = document.getElementById("overlay");
-      overlay.style.display = "none";
+function closeSidebar() {
+    var sidebar = document.getElementById("Sidebar");
+    var main = document.getElementById("main");
+    var overlay = document.getElementById("overlay");
+    overlay.style.display = "none";
 
-      sidebar.style.width = "0";
-      main.style.marginLeft = "0";
-      overlay.style.backgroundColor = "rgba(0,0,0,0)"; /* Set to transparent background */
-  }
+    sidebar.style.width = "0";
+    main.style.marginLeft = "0";
+    overlay.style.backgroundColor = "rgba(0,0,0,0)";
+}
+    // Funktion zum Laden von Text aus einer .txt-Datei
+    function loadTextFromFile(filename, elementId) {
+            fetch(filename)
+                .then(response => response.text())
+                .then(text => {
+                    document.getElementById(elementId).textContent = text;
+                })
+                .catch(error => console.log(error));
+        }
+
+        // Text aus der Datei "anforderungen.txt" in die entsprechenden HTML-Elemente einfügen
+        loadTextFromFile('textpresets/anforderungen.txt', 'anforderungen-heading');
+        loadTextFromFile('textpresets/anforderungen.txt', 'anforderungen-text');
     </script>
 </body>
 </html>
