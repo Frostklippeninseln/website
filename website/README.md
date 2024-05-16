@@ -1,1 +1,0 @@
-Velkomin á
