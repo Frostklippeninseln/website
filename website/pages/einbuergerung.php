@@ -15,25 +15,22 @@
         /* Body styles */
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: white;
+            background-color: lightblue;
         }
 
         /* Header styles */
         header {
             background-color: lightblue;
-            padding: 0px;
             display: flex;
             align-items: center;
         }
 
         .logo img {
-            height: 50px; /* Adjust height as needed */
+            height: 50px;
             margin-left: 20px;
             margin-top: 20px;
-            background-color: white;
             position: fixed;
-            z-index: 4; /* Stay on top */
+            z-index: 4;
         }
         .logo:hover + .sidebar {
             width: 250px;
@@ -50,29 +47,13 @@
         }
 
         nav ul li a {
-            text-decoration: blue;
             color: #333;
-        }
-
-        .search input[type="text"] {
-            padding: 8px;
-            border-radius: 5px;
-            border: none;
-        }
-
-        .search button {
-            padding: 8px 15px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
         /* Hero section styles */
         .hero {
             text-align: center;
-            padding: 80px;
+            padding: 60px 0;
             background-image: url(../public/mountainart.jpg);
         }
 
@@ -84,12 +65,6 @@
         main {
             padding: 20px;
             min-height: 100vh;
-            
-        }
-
-        .about-us,
-        .monarchs-message {
-            margin-bottom: 30px;
         }
 
         /* Footer styles */
@@ -117,7 +92,6 @@
         }
 
         footer .quick-links ul li a {
-            text-decoration: none;
             color: #333;
         }
         .statename{
@@ -125,17 +99,17 @@
             color: #025E73;
         }
         .sidebar {
-            height: 100%; /* 100% Full-height */
-            width: 0; /* 0 width - change this with JavaScript */
-            position: fixed; /* Stay in place */
-            z-index: 3; /* Stay on top */
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 3;
             top: 0;
             left: 0;
             background-color: black;
             background-image: url(../public/mountainart.jpg);
-            overflow-x: hidden; /* Disable horizontal scroll */
-            padding-top: 100px; /* Place content 60px from the top */
-            transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+            overflow-x: hidden;
+            padding-top: 100px;
+            transition: 0.5s;
         }
 
         /* The sidebar links */
@@ -143,7 +117,7 @@
             padding: 8px 8px 8px 32px;
             text-decoration: none;
             font-size: 25px;
-            color: #1d5766;
+            color: #87e7ff;
             display: block;
             transition: 0.3s;
         }
@@ -185,51 +159,37 @@
             right: 0;
             bottom: 0;
             background-color: rgba(0,0,0,0.5);
-            z-index: 3;
+            z-index: 2;
             cursor: pointer;
-            /* Add transition properties */
-            transition: opacity 0.5s ease; /* Transition opacity over 0.5 seconds with ease timing function */
-            border-radius: 70px; /* Du kannst die Pixelzahl nach Bedarf ändern */
-            
+            transition: opacity 0.5s ease;
         }
 
-        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+        /* Style page content */
         #main {
-            transition: margin-left .5s; /* If you want a transition effect */
+            transition: margin-left .5s;
             padding: 20px;
-        }
-
-        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-        @media screen and (max-height: 450px) {
-            .sidebar {padding-top: 15px;}
-            .sidebar a {font-size: 18px;}
         }
         .big-text{
             font-size: 50px;
-            color: #114855;
+            color: lightblue;
             
         }
         .navinfo{
-            color: #472f0b;
+            color: #d4c0be;
             font-size: medium;
         }
         * {box-sizing:border-box}
 
-
+/* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
-  float: right;
+  position: relative;
   margin: auto;
-}
-
-.slideimg {
-    border-radius: 80px; /* Du kannst die Pixelzahl nach Bedarf ändern */
 }
 
 /* Hide the images by default */
 .mySlides {
   display: none;
-  
 }
 
 /* Next & previous buttons */
@@ -268,9 +228,7 @@
   bottom: 8px;
   width: 100%;
   text-align: center;
-  border-radius: 10px; /* Du kannst die Pixelzahl nach Bedarf ändern */
 }
-
 
 /* Number text (1/3 etc) */
 .numbertext {
@@ -307,7 +265,49 @@
   from {opacity: .4}
   to {opacity: 1}
 }
-</style>
+.container {
+        display: flex;
+        justify-content: space-around;
+        padding: 50px 0;
+    }
+    
+    .box {
+        width: 250px;
+        padding: 20px;
+        background-color: lightblue;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    .box:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .box h2 {
+        margin-top: 0;
+    }
+    
+    .box p {
+        margin-bottom: 20px;
+    }
+    
+    .box .btn {
+        display: none;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .box:hover .btn {
+        display: block;
+    }
+    </style>
 </head>
 <body>
     <header>
@@ -317,83 +317,45 @@
     </header>
     <section class="hero">
         <div class="hero-text">
-            <h1 class="statename">Velkomin á                <h1 class="statename">
-                <span class="big-text">Frostklippeninseln</span>
-            </h1>
+            <h1 class="statename">Anforderungen zur Einbürgerung
             </h1>
         </div>
     </section>
 
     <main>
-        <!-- Main content sections -->
         <div id="Sidebar" class="sidebar" onmouseleave="closeSidebar()">
             <p class="navinfo">Anmelden und Registrieren</p>
             <a href="login.html">Login</a>
             <a href="#">Einbürgerung</a>
             <p class="navinfo">Informationen zur Einbürgerung</p>
-            <a href="#">Staatsbürgerschaft</a>
+            <a href="staatsbuergerschaft.html">Staatsbürgerschaft</a>
             <a href="anforderungen.html">Anforderungen zur Einbürgerung</a>
             <p class="navinfo">Leben auf den Frostklippeninseln</p>
-            <a href="#">Lebensbedingungen</a>
+            <a href="lebensbedingungen.html">Lebensbedingungen</a>
             <a href="sprache.html">Sprache</a>
-            <a href="#">Regionen</a>
+            <a href="regionen.html">Regionen</a>
             <p class="navinfo">Allgemein</p>
             <a href="#">Hilfe</a>
             <a href="#">Fehler Melden</a>
         </div>
         <div id="overlay"></div> 
-
-        <section class="monarchs-message">
-   <!-- Slideshow container -->
-<div class="slideshow-container">
-
-    <!-- Full-width images with number and caption text -->
-    <div class="mySlides fade">
-      <img src="/home/users/maximilian.turin/website/website/website/public/carousel/iceland-2111811_1280.jpg" class="slideimg" style="width:100%">
+        <div class="container">
+    <div class="box">
+        <h2>Staatsbürgerschaft Klasse 1</h2>
+        <p>Beschreibungstext 1</p>
+        <button class="btn">Prüfen lassen</button>
     </div>
-  
-    <div class="mySlides fade">
-      <img src="/home/users/maximilian.turin/website/website/website/public/carousel/husavik-3654390_1280.jpg" class="slideimg" style="width:100%">
+    <div class="box">
+        <h2>Staatsbürgerschaft Klasse 2</h2>
+        <p>Beschreibungstext 2</p>
+        <button class="btn">Test starten</button>
     </div>
-
-    <div class="mySlides fade">
-        <img src="/home/users/maximilian.turin/website/website/website/public/carousel/lagoon-5104385_1280.jpg" class="slideimg" style="width:100%">
-      </div>
-
-    <div class="mySlides fade">
-      <img class="slideimg"  src="/home/users/maximilian.turin/website/website/website/public/carousel/mountains-482689_1280.jpg" style="width:100%">
+    <div class="box">
+        <h2>Staatsbürgerschaft Klasse 3</h2>
+        <p>Beschreibungstext 3</p>
+        <button class="btn">Prüfen lassen</button>
     </div>
 </div>
-<div class="explanationbox">
-    <h1>Leben auf den Frostklippeninseln</h1>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.s</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.s</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.s</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.s</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.s</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.</p>
-    <p class="beschreibungstext">‎ </p>
-    <p class="beschreibungstext">Erlebe die wunderschöne Natur in vollen Zügen.s</p>
-</div>
-        </section>
-        <!-- Other sections -->
-
     </main>
 
     <footer>
@@ -413,20 +375,6 @@
         </div>
     </footer>
     <script>
-  let slideIndex = 0;
-showSlides();
-
-function showSlides() {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides, 5000); // Change image every 2 seconds
-} 
 function openSidebar() {
     var sidebar = document.getElementById("Sidebar");
     var main = document.getElementById("main");
@@ -446,12 +394,8 @@ function closeSidebar() {
 
     sidebar.style.width = "0";
     main.style.marginLeft = "0";
-    overlay.style.backgroundColor = "rgba(0,0,0,0)"; /* Set to transparent background */
+    overlay.style.backgroundColor = "rgba(0,0,0,0)";
 }
     </script>
-    
-    
-    
 </body>
 </html>
-

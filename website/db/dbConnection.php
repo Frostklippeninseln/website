@@ -4,7 +4,7 @@
         private static $servername = "localhost";
         private static $username = "dbuser";
         private static $password = "dbpassword";
-        private static $dbname = "vrepublik";
+        private static $dbname = "Frostklippeninseln";
 
         private static $conn;
 
