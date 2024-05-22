@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frostklippeninseln</title>
+    <style>
+        /* Resetting default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+        }
+
+        /* Header styles */
+        header {
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-left: 20px;
+            margin-top: 20px;
+            position: fixed;
+            z-index: 4;
+        }
+        .logo:hover + .sidebar {
+            width: 250px;
+            margin-left: 100px;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #333;
+        }
+
+        /* Hero section styles */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            background-image: url(../public/mountainart.jpg);
+        }
+
+        .hero-text {
+            margin-top: 00px;
+        }
+
+        /* Main content section styles */
+        main {
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .line {
+            border-top: 1px solid #333; /* Stilisierte Linie */
+            margin-bottom: 10px;
+        }
+
+
+        .number-container {
+            float: right;
+            margin-top: 20px;
+        }
+
+        .number-box {
+            background-color: lightblue;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .number-box p {
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 5px;
+        }
+
+
+        /* Footer styles */
+        footer {
+            background-color: lightblue;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+            position: sticky;
+            bottom: -10em;
+            width: 100%;
+            transition: bottom 0.5s;
+        }
+        footer:hover {
+            bottom: 0px;
+        }
+
+        footer .quick-links ul {
+            list-style-type: none;
+        }
+
+        footer .quick-links ul li {
+            margin-bottom: 10px;
+        }
+
+        footer .quick-links ul li a {
+            color: #333;
+        }
+        .statename{
+            font-size: 25px;
+            color: #025E73;
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            background-color: black;
+            background-image: url(../public/mountainart.jpg);
+            overflow-x: hidden;
+            padding-top: 100px;
+            transition: 0.5s;
+        }
+
+        /* The sidebar links */
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #87e7ff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Position and style the close button (top right corner) */
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* The button used to open the sidebar */
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+        #overlay {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2;
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Style page content */
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+        }
+        .big-text{
+            font-size: 50px;
+            color: lightblue;
+
+        }
+        .navinfo{
+            color: #d4c0be;
+            font-size: medium;
+        }
+        * {box-sizing:border-box}
+
+        /* Bereits vorhandener CSS-Code... */
+
+        .text-box {
+            background-color: lightblue;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            max-width: 300px; /* Maximalbreite der Box */
+
+        }
+        
+        
+    
+        .num-box {
+            background-color: lightblue;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            max-width: 300px; /* Maximalbreite der Box */
+            align-self: right;
+            text-align: right;
+            float:right;
+            position: absolute;
+            top: 170px;
+            right: 30px;
+            
+
+        }
+
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" onmouseenter="openSidebar()">
+            <a href="index.html"><img src="../public/Frostklingeninseln.png" alt="Monarchy Logo"></a>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="hero-text">
+            <h1 class="statename">Sprache der Frostklippeninseln
+            </h1>
+        </div>
+    </section>
+
+    <main>
+
+
+
+
+
+
+        </div>
+
+
+            <!-- Sidebar -->
+            <div id="Sidebar" class="sidebar" onmouseleave="closeSidebar()">
+                <!-- Sidebar-Inhalt -->
+                <p class="navinfo">Anmelden und Registrieren</p>
+                <a href="login.html">Login</a>
+                <a href="einbuergerung.html">Einbürgerung</a>
+                <p class="navinfo">Informationen zur Einbürgerung</p>
+                <a href="staatsbuergerschaft.html">Staatsbürgerschaft</a>
+                <a href="anforderungen.html">Anforderungen zur Einbürgerung</a>
+                <p class="navinfo">Leben auf den Frostklippeninseln</p>
+                <a href="lebensbedingungen.html">Lebensbedingungen</a>
+                <a href="#">Sprache</a>
+                <a href="regionen.html">Regionen</a>
+                <p class="navinfo">Allgemein</p>
+                <a href="#">Hilfe</a>
+                <a href="#">Fehler Melden</a>
+            </div>
+
+            <!-- Textinhalt -->
+            <div class="text-box">
+                <!-- Textinhalt hier -->
+                <h2>Nordavisk</h2>
+            <hr class="line">
+            <p>In den ehrfurchtgebietenden Gefilden der Frostklippeninseln, einem reichhaltigen Archipel nordischer Pracht, liegt eine Sprache von unvergleichlicher Majestät und Erhabenheit: Nordavisk. Aus den Nebeln der nordischen Vergangenheit entsprungen, trägt Nordavisk die Erzählungen alter Zeiten auf den Schwingen der Ewigkeit.
+
+                Ihr Ursprung, tief verwurzelt in den mythischen Sagen nordischer Götter und heroischer Epen, erhebt sich wie ein stolzer Koloss aus den kargen Gefilden der Vergangenheit. Als Erbe einer reichen kulturellen Tradition, geboren aus den rauen Wellen des Nordmeers und den eisigen Winden des Nordens, ist Nordavisk mehr als nur eine Sprache - sie ist ein Erbe, das durch die Jahrhunderte hallt.
+
+                In den uralten Hallen der Frostklippeninseln erblühte Nordavisk, durchwoben von der Anmut der nordischen Götter und dem Echo vergangener Schlachten. Ihre Wurzeln reichen tief in die Äther der nordischen Mythologie, wo die Schöpfungsgeschichten der Götter und die Heldentaten der Tapferen sich zu einem lebendigen Gewebe verweben, das die Seele des Nordens einfängt.
+
+                Nordavisk - die Sprache der Frostklippeninseln - erzählt von einer Zeit, in der die Götter mit den Menschen wandelten und die Legenden der Helden die Herzen der Nachkommen erfüllten. Ihre Worte sind wie das Klingen alter Waffen, das Raunen uralter Bäume und das Flüstern der wintrythmischen Winde - eine Hymne an die nordische Seele, die in den Tiefen der Zeit verankert ist.</p>
+            </div>
+
+            <!-- Zahlen-Container -->
+            <div class="num-box">
+                <h2 style="font-family: 'Times New Roman', Times, serif">Zahlen</h2> <!-- Überschrift für die Zahlen -->
+                <hr class="line"> <!-- Linie -->
+                <div class="number-box">
+                    <!-- Zahlen hier einfügen -->
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">0 - Núll </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">1 - Ein  </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">2 - Tvö </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">3 - Þrjú </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">4 - Fjögur </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">5 - Fimm </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">6 - Sex </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">7 - Sjö </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">8 - Átta </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">9 - Níu </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">10 - Ti </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">100 - Hundur </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">1000 - Þúsund </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">10.000 - Ti þúsund </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">100.000 - Hundur þúsund </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">1.000.000 - Milljón </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">1.000.000.000 - Milljarður  </p>
+                    <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">1.000.000.000.000 - Billjón</p>
+                </div>
+            </div>
+            
+            <div class="ansage">
+                <p style="font-size:20px; font-family: 'Times New Roman', Times, serif">0 - Núll </p>
+            
+            </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="maincontencont">
+            <!-- Hier wird der Text aus der Datei "anforderungen.txt" eingefügt -->
+            <h1 id="anforderungen-heading"></h1>
+            <p id="anforderungen-text"></p>
+    </main>
+
+    <footer>
+        <div class="quick-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Use</a></li>
+            </ul>
+        </div>
+        <div class="contact-info">
+            <h3>Kontakt</h3>
+            <p>Email: FKI@gmail.com</p>
+            <p>Nummer: +49 176 47674780</p>
+            <p>Addresse: Frostklippeninseln</p>
+        </div>
+    </footer>
+    <script>
+function openSidebar() {
+    var sidebar = document.getElementById("Sidebar");
+    var main = document.getElementById("main");
+    var overlay = document.getElementById("overlay");
+
+    sidebar.style.width = "300px";
+    main.style.marginLeft = "300px";
+    overlay.style.display = "block";
+    overlay.style.backgroundColor = "rgba(0,0,0,0.7)";
+}
+
+function closeSidebar() {
+    var sidebar = document.getElementById("Sidebar");
+    var main = document.getElementById("main");
+    var overlay = document.getElementById("overlay");
+    overlay.style.display = "none";
+
+    sidebar.style.width = "0";
+    main.style.marginLeft = "0";
+    overlay.style.backgroundColor = "rgba(0,0,0,0)";
+}
+    // Funktion zum Laden von Text aus einer .txt-Datei
+    function loadTextFromFile(filename, elementId) {
+            fetch(filename)
+                .then(response => response.text())
+                .then(text => {
+                    document.getElementById(elementId).textContent = text;
+                })
+                .catch(error => console.log(error));
+        }
+
+        // Text aus der Datei "anforderungen.txt" in die entsprechenden HTML-Elemente einfügen
+        loadTextFromFile('textpresets/anforderungen.txt', 'anforderungen-heading');
+        loadTextFromFile('textpresets/anforderungen.txt', 'anforderungen-text');
+    </script>
+</body>
+</html>
