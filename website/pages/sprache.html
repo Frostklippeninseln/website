@@ -117,6 +117,7 @@
         }
 
         footer .quick-links ul li a {
+            text-decoration: none;
             color: #333;
         }
         .statename{
@@ -124,17 +125,17 @@
             color: #025E73;
         }
         .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 3;
+            height: 100%; /* 100% Full-height */
+            width: 0; /* 0 width - change this with JavaScript */
+            position: fixed; /* Stay in place */
+            z-index: 3; /* Stay on top */
             top: 0;
             left: 0;
             background-color: black;
             background-image: url(../public/mountainart.jpg);
-            overflow-x: hidden;
-            padding-top: 100px;
-            transition: 0.5s;
+            overflow-x: hidden; /* Disable horizontal scroll */
+            padding-top: 100px; /* Place content 60px from the top */
+            transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
         }
 
         /* The sidebar links */
@@ -142,7 +143,7 @@
             padding: 8px 8px 8px 32px;
             text-decoration: none;
             font-size: 25px;
-            color: #87e7ff;
+            color: #1d5766;
             display: block;
             transition: 0.3s;
         }
@@ -225,8 +226,32 @@
             max-width: 300px; /* Maximalbreite der Box */
             align-self: right;
             text-align: right;
+            position: absolute;
+            right: 25px;
+            top: 170px;
 
         }
+
+        .textsquare {
+            background-color: lightblue;
+            position: absolute;
+            right:  475px;
+            top: 170px;
+            text-align: center;
+            align-self: center;
+        }
+
+        .textsquaree {
+            background-color: lightblue;
+            position: absolute;
+            right:  375px;
+            top: 350px;
+            left: 375px;
+            text-align: center;
+            align-self: center;
+        }
+        
+        
 
 
 /* Slideshow container */
@@ -398,20 +423,21 @@
                 </div>
             </div>
 
+            <div class="textsquare">
+                <h1 style="font-size:20px; font-family: 'Times New Roman', Times, serif">Das Alphabet</h1>
+                <p style="font-size:40px; font-family: 'Times New Roman', Times, serif">A, Á, B, D, Ð, E, É, F, G, H, I, Í, J, K, L, M, 
+                </p>
+                <p style="font-size:40px; font-family: 'Times New Roman', Times, serif"> N, O, Ó, P, R, S, T, U, Ú, V, Y, Ý, Þ, Ö
+                </p>
+            </div>
+
+            <div class="textsquaree">
+                <h1 style="font-size:20px; font-family: 'Times New Roman', Times, serif">Grammatik</h1>
+                
+                
+            </div>
 
 
-
-
-
-
-
-
-
-
-        <div class="maincontencont">
-            <!-- Hier wird der Text aus der Datei "anforderungen.txt" eingefügt -->
-            <h1 id="anforderungen-heading"></h1>
-            <p id="anforderungen-text"></p>
     </main>
 
     <footer>
@@ -431,6 +457,20 @@
         </div>
     </footer>
     <script>
+  let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 5000); // Change image every 2 seconds
+} 
 function openSidebar() {
     var sidebar = document.getElementById("Sidebar");
     var main = document.getElementById("main");
@@ -450,21 +490,11 @@ function closeSidebar() {
 
     sidebar.style.width = "0";
     main.style.marginLeft = "0";
-    overlay.style.backgroundColor = "rgba(0,0,0,0)";
+    overlay.style.backgroundColor = "rgba(0,0,0,0)"; /* Set to transparent background */
 }
-    // Funktion zum Laden von Text aus einer .txt-Datei
-    function loadTextFromFile(filename, elementId) {
-            fetch(filename)
-                .then(response => response.text())
-                .then(text => {
-                    document.getElementById(elementId).textContent = text;
-                })
-                .catch(error => console.log(error));
-        }
-
-        // Text aus der Datei "anforderungen.txt" in die entsprechenden HTML-Elemente einfügen
-        loadTextFromFile('textpresets/anforderungen.txt', 'anforderungen-heading');
-        loadTextFromFile('textpresets/anforderungen.txt', 'anforderungen-text');
     </script>
+    
+    
+    
 </body>
 </html>
