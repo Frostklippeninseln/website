@@ -1,101 +1,3 @@
-<?php
-session_start();
-
-// Sitzung zurücksetzen, wenn die Seite neu geladen wird
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_session'])) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-
-// Initialisiere die Gesamtpunktzahl, wenn noch nicht gesetzt
-if (!isset($_SESSION['total_score'])) {
-    $_SESSION['total_score'] = 0;
-}
-
-// Verbindung zur Datenbank herstellen
-require_once '../db/dbConnection.php'; // Stelle sicher, dass die Verbindungsdatei vorhanden ist
-$conn = DBConn::getConn();
-
-function getNewQuestion($conn) {
-    // Initialisiere die Session-Variablen, wenn sie noch nicht gesetzt sind
-    if (!isset($_SESSION['answered_questions'])) {
-        $_SESSION['answered_questions'] = array();
-    }
-    if (!isset($_SESSION['current_question_index'])) {
-        $_SESSION['current_question_index'] = 0;
-    }
-
-    // Alle Fragen-IDs abrufen
-    $sql_all_questions = "SELECT fragen_ID FROM Einbürgerung";
-    $result_all_questions = $conn->query($sql_all_questions);
-
-    $all_questions = array();
-    if ($result_all_questions->num_rows > 0) {
-        while ($row = $result_all_questions->fetch_assoc()) {
-            $all_questions[] = $row['fragen_ID'];
-        }
-    }
-
-    // Mögliche Fragen-IDs filtern, die noch nicht beantwortet wurden
-    $available_questions = array_diff($all_questions, $_SESSION['answered_questions']);
-
-    // Prüfen, ob noch Fragen verfügbar sind
-    if (empty($available_questions) || $_SESSION['current_question_index'] >= 10) {
-        return null; // Keine neuen Fragen mehr oder maximal 10 Fragen erreicht
-    }
-
-    // Zufällige Frage-ID auswählen
-    $randomQuestionID = $available_questions[array_rand($available_questions)];
-
-    // Frage und Antworten abrufen
-    $sql_question = "SELECT * FROM Einbürgerung WHERE fragen_ID = $randomQuestionID";
-    $result_question = $conn->query($sql_question);
-
-    if ($result_question->num_rows > 0) {
-        $row_question = $result_question->fetch_assoc();
-
-        $sql_correct_answer = "SELECT Antwort FROM Antworten WHERE fragen_ID = $randomQuestionID AND ist_richtig = 1";
-        $result_correct_answer = $conn->query($sql_correct_answer);
-
-        $answers = array();
-
-        if ($result_correct_answer->num_rows > 0) {
-            $row_correct_answer = $result_correct_answer->fetch_assoc();
-            $answers[] = $row_correct_answer['Antwort'];
-        }
-
-        $sql_wrong_answers = "SELECT Antwort FROM Antworten WHERE fragen_ID = $randomQuestionID AND ist_richtig = 0 ORDER BY RAND() LIMIT 3";
-        $result_wrong_answers = $conn->query($sql_wrong_answers);
-
-        if ($result_wrong_answers->num_rows > 0) {
-            while ($row_wrong_answer = $result_wrong_answers->fetch_assoc()) {
-                $answers[] = $row_wrong_answer['Antwort'];
-            }
-        }
-
-        shuffle($answers);
-       
-
-        $_SESSION['answered_questions'][] = $randomQuestionID;
-        //Schwiergigkeitsgrad abrufen
-	$sql_schwierigkeit = "SELECT schwierigkeitsgrad FROM Einbürgerung WHERE fragen_ID = $randomQuestionID";
-	$result_schwierigkeit = $conn->query($sql_schwierigkeit);
-
-	if ($result_schwierigkeit->num_rows > 0) {
-	    $row_schwierigkeit = $result_schwierigkeit->fetch_assoc();
-	    $schwierigkeit = $row_schwierigkeit['schwierigkeitsgrad'];
-	}
-
-        return array('frage' => $row_question["frage"], 'answers' => $answers, 'frage_id' => $randomQuestionID); // hinzugefügt
-    } else {
-        return null;
-    }
-}
-
-$currentQuestion = getNewQuestion($conn);
-?>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -103,7 +5,7 @@ $currentQuestion = getNewQuestion($conn);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fragebogen</title>
     <style>
-       body {
+        body {
             font-family: Arial, sans-serif;
             background-color: #ffffff;
             margin: 0;
@@ -177,72 +79,132 @@ $currentQuestion = getNewQuestion($conn);
     </style>
 </head>
 <body>
-   <div class="container" style="position: relative;">
-    <!-- PHP hier beibehalten -->
-    <!-- HTML hier beibehalten -->
-    <?php if ($currentQuestion): ?>
-        <div class="question">
-            <h2><?php echo $currentQuestion['frage']; ?></h2>
-            <ul class="answers">
-                <?php foreach ($currentQuestion['answers'] as $answer): ?>
-                    <li><label><input type="radio" name="answer" value="<?php echo $answer; ?>"> <?php echo $answer; ?></label></li>
-                <?php endforeach; ?>
-            </ul>
+    <div class="container">
+        <div class="points">
+            <div class="point"></div>
+            <div class="point"></div>
+            <div class="point"></div>
+            <div class="point"></div>
+            <div class="point"></div>
+            <div class="point"></div>
+            <div class="point"></div>
+            <div class="point"></div>
+            <div class="point"></div>
+            <div class="point"></div>
         </div>
-    <?php else: ?>
-        <div class="finished-text">Der Test ist abgeschlossen. Vielen Dank!</div>
-    <?php endif; ?>
-    <!-- HTML hier beibehalten -->
-    <div class="submit-container">
-        <?php if ($currentQuestion): ?>
-            <button class="submit-btn" onclick="submitAnswer()">Absenden</button>
-        <?php else: ?>
-            <button class="submit-all-btn" onclick="submitAll()">Alles Absenden</button>
-        <?php endif; ?>
-    </div>
-    <!-- Schwierigkeitsgrad wird links unten angezeigt -->
-    <?php if (isset($schwierigkeit)) {
-        echo "<p style=\"position: absolute; bottom: 10px; left: 10px;\">Schwierigkeitsgrad: $schwierigkeit</p>";
-    } ?>
-</div>
-    </div>
+        
+        <?php
+    // Verbindung zur Datenbank herstellen
+    require_once '../db/dbConnection.php'; // Stelle sicher, dass die Verbindungsdatei vorhanden ist
+    $conn = DBConn::getConn();
 
-    <form id="resetForm" method="POST" style="display: none;">
-        <input type="hidden" name="reset_session" value="1">
-    </form>
+    // Generiere eine Zufallszahl zwischen 1 und 20
+    $randomQuestionID = mt_rand(1, 20);
+
+    // Debugging-Nachricht für die generierte Zufallszahl
+    echo "Zufallszahl für Frage-ID: " . $randomQuestionID . "<br>";
+
+    // SQL-Abfrage, um die Frage mit der generierten Zufalls-ID abzurufen
+    $sql_question = "SELECT * FROM Einbürgerung WHERE fragen_ID = $randomQuestionID";
+    $result_question = $conn->query($sql_question);
+
+    // Debugging-Nachricht für die SQL-Abfrage der Frage
+    echo "SQL-Abfrage für Frage: " . $sql_question . "<br>";
+
+    // Prüfe, ob die Frage vorhanden ist
+    if ($result_question->num_rows > 0) {
+        // Frage aus dem Abfrageergebnis abrufen
+        $row_question = $result_question->fetch_assoc();
+
+        // Die richtige Antwort für die Frage aus der Datenbank abrufen
+        $sql_correct_answer = "SELECT Antwort FROM Antworten WHERE fragen_ID = $randomQuestionID AND ist_richtig = 1";
+        $result_correct_answer = $conn->query($sql_correct_answer);
+
+        // Debugging-Nachricht für die Frage aus der Datenbank
+        echo "Frage aus Datenbank: " . $row_question["frage"] . "<br>";
+
+        // Array zum Speichern aller Antwortmöglichkeiten initialisieren
+        $answers = array();
+
+        // Die richtige Antwort hinzufügen
+        if ($result_correct_answer->num_rows > 0) {
+            $row_correct_answer = $result_correct_answer->fetch_assoc();
+            $answers[] = $row_correct_answer['Antwort'];
+        }
+
+        // Falsche Antworten aus der Datenbank abrufen
+        $sql_wrong_answers = "SELECT Antwort FROM Antworten WHERE fragen_ID != $randomQuestionID ORDER BY RAND() LIMIT 2";
+        $result_wrong_answers = $conn->query($sql_wrong_answers);
+
+        // Falsche Antworten hinzufügen
+        if ($result_wrong_answers->num_rows > 0) {
+            while ($row_wrong_answer = $result_wrong_answers->fetch_assoc()) {
+                $answers[] = $row_wrong_answer['Antwort'];
+            }
+        }
+
+        // Die Antworten mischen, um sicherzustellen, dass die richtige Antwort nicht immer an der gleichen Stelle ist
+        shuffle($answers);
+
+        // Debugging-Nachricht für die richtige Antwort
+        echo "Richtige Antwort: " . $row_correct_answer['Antwort'] . "<br>";
+
+        // Debugging-Nachricht für die falschen Antworten
+        echo "Falsche Antworten: <br>";
+        foreach ($answers as $answer) {
+            echo $answer . "<br>";
+        }
+
+        // Frage und Antworten anzeigen
+        echo '<div class="question">';
+        echo '<h2>' . $row_question["frage"] . '</h2>'; // Anpassung des Schlüssels an fragen_ID
+        echo '<ul class="answers">';
+        foreach ($answers as $answer) {
+            echo '<li><label><input type="radio" name="answer" value="' . $answer . '"> ' . $answer . '</label></li>';
+        }
+        echo '</ul>';
+        echo '</div>';
+    } else {
+        echo "Frage nicht gefunden.";
+    }
+?>
+
+
+
+
+
+
+        
+        <div class="submit-container">
+            <button class="submit-btn" onclick="submitAnswer()">Absenden</button>
+            <button class="submit-all-btn" onclick="submitAll()" style="display: none;">Alles Absenden</button>
+        </div>
+        <div class="finished-text">Der Test ist abgeschlossen. Vielen Dank!</div>
+    </div>
 
     <script>
         function submitAnswer() {
-            // Fortschritt speichern und Seite neu laden, um eine neue Frage zu generieren
-            fetch('update_progress.php', { method: 'POST' })
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    } else {
-                        throw new Error('Network response was not ok.');
-                    }
-                })
-                .then(text => {
-                    if (text === 'redirect') {
-                        window.location.href = 'ergebnis.html';
-                    } else {
-                        location.reload();
-                    }
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
+            const points = document.querySelectorAll('.point');
+            let activePoint = -1;
+            points.forEach((point, index) => {
+                if (point.classList.contains('active')) {
+                    activePoint = index;
+                }
+            });
+
+            if (activePoint < points.length - 1) {
+                points[activePoint + 1].classList.add('active');
+            }
+
+            if (activePoint + 1 === points.length - 1) {
+                document.querySelector('.submit-btn').style.display = 'none';
+                document.querySelector('.submit-all-btn').style.display = 'block';
+            }
         }
 
         function submitAll() {
             document.querySelector('.finished-text').style.display = 'block';
         }
-
-        // Session zurücksetzen, wenn die Seite verlassen wird
-        window.addEventListener('beforeunload', function() {
-            document.getElementById('resetForm').submit();
-        });
     </script>
 </body>
 </html>
-
