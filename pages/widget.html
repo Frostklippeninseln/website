@@ -3,9 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home Widget</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@interactjs/interactjs/index.min.js"></script>
 </head>
+<style>
+    body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../public/backgroundimage.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.app-box {
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 1em;
+    font-weight: bold;
+    position: relative; /* Changed to relative for proper positioning */
+}
+
+.app-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.sortable-ghost {
+    opacity: 0.4;
+    background: #ddd;
+}
+
+.sortable-chosen {
+    background: #f0f0f0;
+}
+
+</style>
 <body>
-    
+    <div class="container">
+        <div id="app-grid" class="app-grid">
+            <div class="app-box" data-row="1" data-col="1" data-size-x="1" data-size-y="1">Widget 1</div>
+            <div class="app-box" data-row="1" data-col="2" data-size-x="2" data-size-y="1">Widget 2</div>
+            <div class="app-box" data-row="2" data-col="1" data-size-x="1" data-size-y="2">Widget 3</div>
+            <div class="app-box" data-row="2" data-col="2" data-size-x="1" data-size-y="1">Widget 4</div>
+            <div class="app-box" data-row="2" data-col="3" data-size-x="1" data-size-y="1">Widget 5</div>
+            <div class="app-box" data-row="3" data-col="1" data-size-x="1" data-size-y="1">Widget 6</div>
+            <div class="app-box" data-row="3" data-col="2" data-size-x="1" data-size-y="1">Widget 7</div>
+            <div class="app-box" data-row="3" data-col="3" data-size-x="1" data-size-y="1">Widget 8</div>
+            <div class="app-box" data-row="4" data-col="1" data-size-x="1" data-size-y="1">Widget 9</div>
+            <div class="app-box" data-row="4" data-col="2" data-size-x="1" data-size-y="1">Widget 10</div>
+            <div class="app-box" data-row="4" data-col="3" data-size-x="1" data-size-y="1">Widget 11</div>
+            <div class="app-box" data-row="4" data-col="4" data-size-x="1" data-size-y="1">Widget 12</div>
+            <div class="app-box" data-row="5" data-col="1" data-size-x="1" data-size-y="1">Widget 13</div>
+            <div class="app-box" data-row="5" data-col="2" data-size-x="1" data-size-y="1">Widget 14</div>
+            <div class="app-box" data-row="5" data-col="3" data-size-x="1" data-size-y="1">Widget 15</div>
+            <div class="app-box" data-row="5" data-col="4" data-size-x="1" data-size-y="1">Widget 16</div>
+        </div>
+    </div>
+    <script>
+        // Function to update grid areas based on data attributes
+function updateGridAreas() {
+  const boxes = document.querySelectorAll('.app-box');
+  boxes.forEach(box => {
+    const row = box.getAttribute('data-row');
+    const col = box.getAttribute('data-col');
+    const sizeX = box.getAttribute('data-size-x');
+    const sizeY = box.getAttribute('data-size-y');
+    box.style.gridArea = `${row} / ${col} / span ${sizeY} / span ${sizeX}`;
+  });
+}
+
+updateGridAreas();
+
+interact('.app-box')
+  .draggable({
+    inertia: true,
+    autoScroll: true,
+    listeners: {
+      move: dragMoveListener,
+      end(event) {
+        const target = event.target;
+        const grid = document.getElementById('app-grid');
+        const rect = grid.getBoundingClientRect();
+        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        
+        const row = Math.round((y + rect.top) / (rect.height / 5));
+        const col = Math.round((x + rect.left) / (rect.width / 4));
+        
+        target.setAttribute('data-row', row + 1);
+        target.setAttribute('data-col', col + 1);
+        
+        target.style.transform = 'none';
+        target.setAttribute('data-x', 0);
+        target.setAttribute('data-y', 0);
+        
+        updateGridAreas();
+      }
+    }
+  });
+
+function dragMoveListener(event) {
+  const target = event.target;
+  const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+  const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+  target.style.transform = `translate(${x}px, ${y}px)`;
+
+  target.setAttribute('data-x', x);
+  target.setAttribute('data-y', y);
+}
+
+    </script>
 </body>
 </html>
