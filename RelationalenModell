@@ -1,0 +1,10 @@
+Einwohner(#EinwohnerID, STadt, Straße, Gesachlecht, Vorname, Nachname, Staatsangehörigkeit, PLZ, Hausnummer, Famlilienstand, Telefonnummer, GEburtsdatum, Geburtsort, Email, ist_staatsbürger)
+Finanzen(#Finanz_ID, Nebeneinkünfte, Banknbame, Geldsumme, Einwohner_ID↑)
+Bildung(#Bildung_ID, Jahr_Bildungsabschluss, Biludungsabschluss, Einwohner_ID↑)
+Beruf(#Beruf_ID, beruf, seit_wann, haupteinkuenfte, Einwohner_ID↑)
+Einbuergerung(#Frage_ID, frage, schwierigkeitsgrad)
+Encryption_key(#key_ID, Encryption_Key)
+Mitgliedschaft(#Mitgliedschft_ID, name, position, seit_wann, Einwohner_ID↑)
+token(#token_ID, token, Einwohner_ID↑)
+antworten(#antworten_ID, antwort, ist_richtig, Frage_ID↑)
+
