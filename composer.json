@@ -1,0 +1,5 @@
+{
+    "require": {
+        "pragmarx/countries": "^0.8.2"
+    }
+}
