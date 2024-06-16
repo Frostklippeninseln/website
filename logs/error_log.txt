@@ -1,0 +1,69 @@
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* hellgrauer Hintergrund */
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333; /* dunkler Hintergrund für Header */
+            color: #fff; /* weiße Schriftfarbe für Header */
+            text-align: center;
+            padding: 10px 0;
+        }
+        .timer-bar {
+            background-color: #4CAF50; /* grüne Timer-Leiste */
+            height: 10px;
+            width: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff; /* weißer Hintergrund für den Fragebogen */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .frage-box {
+            background-color: #f9f9f9; /* hellere Box-Hintergrundfarbe */
+            border: 1px solid #ddd; /* hellgrauer Rand */
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px; /* Abstand zwischen den Boxen */
+            position: relative; /* Position relativ für das Punkte-Span */
+        }
+        .frage-box h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .antworten {
+            margin-bottom: 10px;
+        }
+        .antworten label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .punkte {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 14px;
+            color: #666; /* Graue Farbe für den Punkte-Text */
+        }
+        .absenden {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .absenden button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50; /* grüner Button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .absenden button:hover {
+            background-color: #45a049;
+        }
+    </style>

@@ -1,0 +1,36 @@
+Session variables set at 2024-06-16 13:38:35:
+loggedin: 1
+einwohner_ID: 
+-------------------------
+Session variables set at 2024-06-16 13:40:10:
+loggedin: 1
+einwohner_ID: 
+einwohner_id: 40
+-------------------------
+Session variables set at 2024-06-16 13:42:13:
+loggedin: 1
+einwohner_ID: 40
+einwohner_id: 40
+-------------------------
+Session variables set at 2024-06-16 13:44:20:
+loggedin: 1
+einwohner_ID: 40
+einwohner_id: 40
+-------------------------
+Session variables set at 2024-06-16 13:46:27:
+loggedin: 1
+einwohner_ID: 40
+einwohner_id: 40
+-------------------------
+Session variables set at 2024-06-16 17:23:47:
+loggedin: 1
+einwohner_ID: 40
+-------------------------
+Session variables set at 2024-06-16 23:08:37:
+loggedin: 1
+einwohner_ID: 40
+-------------------------
+Session variables set at 2024-06-17 00:59:35:
+loggedin: 1
+einwohner_ID: 40
+-------------------------
