@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #f0f0f0, #333);
+    background-size: cover; /* Ensures the gradient covers the entire viewport */
+    background-attachment: fixed; /* Prevents the background from scrolling */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Makes the body take up the full viewport height */
+    overflow: hidden;
+}
+.container
+{
+    filter: blur(16px);
+}
+
+header {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.user-info {
+    font-size: 1rem;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.dashboard-box {
+    width: 250px;
+    height: 200px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.dashboard-box:hover {
+    transform: translateY(-5px);
+}
+
+.money-graph {
+    /* Styling for money graph box */
+}
+
+.bank-info {
+    /* Styling for bank information box */
+}
+
+.job-info {
+    /* Styling for job and income box */
+}
+
+.possession-info {
+    position: relative;
+    /* Styling for possession box */
+}
+
+.blurred-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.5);
+    max-width: 50px;
+}
+.infotext
+{
+    align-content: center;
+    position: absolute;
+    font-size: 30px;
+    color: gray;
+    z-index: 1000;
+}
